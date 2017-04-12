@@ -82,7 +82,7 @@
 "><b>&nbsp;</b></span><span title="Nessa guia vou explicar um pouco sobre dependencies, não sou nenhum profissional mas pretendo fazer isso para ajudar vocês.
 
 ">In this guide I will explain a bit about dependencies, I am no professional but I intend to do this to help you.</span>
-<br />
+<br /><br />
 <span title="O que é dependencies?
 "><b>What is dependencies?</b></span><span title="O nome já diz, são suas dependencias para construir sua rom, ou seja, aquilo que seu dispositivo depende para ser compilado a rom.
 
@@ -125,7 +125,8 @@ lineage.dependencies.</span><span title="O mesmo pode ser feito em outras, Ex: a
 "><i>https://github.com/LineageOS/android_kernel_msmxxxx</i></span></span><br />
 <span class="" id="result_box" lang="en"><span title="https://github.com/LineageOS/android_kernel_msmxxxx
 
-"><i>&nbsp;</i></span><span title="você iria precisar fazer isso manualmente em cada um dos repositórios:
+"><br />
+<i>&nbsp;</i></span><span title="você iria precisar fazer isso manualmente em cada um dos repositórios:
 "><b>You would need to do this manually in each of the repositories</b>:</span><span title="git clone https://github.com/LineageOS/android_device_qcom_common -b branch device/qcom/common
 
 "><i>&nbsp;</i></span></span><br />
@@ -156,7 +157,8 @@ necessary, you would only need to "<i>git clone</i>" in your device tree.</span>
 ">&nbsp;</span></span><br />
 <span class="" id="result_box" lang="en"><span title="branch = branch que deve ser clonada
 
-">branch = branch that should be cloned</span><span title="Você deve iniciar seu arquivo com &quot;[&quot; para sinalizar abertura da dependencies e terminar com &quot;]&quot; para sinalizar fechamento de sua dependencies.
+">branch = branch that should be cloned</span>
+<br /><span title="Você deve iniciar seu arquivo com &quot;[&quot; para sinalizar abertura da dependencies e terminar com &quot;]&quot; para sinalizar fechamento de sua dependencies.
 ">You should start your file with "[" to signal opening of dependencies and end with "]" to signal closing of your dependencies.</span><span title="Para cada repositorio você precisa iniciar com &quot;{&quot; para sinalizar abertura de repositorio e terminar com &quot;}&quot; para sinalizar fechamento de seu repositório.
 ">For each repository you need to start with "{" to signal repository 
 opening and end with "}" to signal closing of your repository.</span><span title="Lembre-se que sempre precisa a cada repositorio fechar com uma &quot;,&quot; exceto ao branch (ou ultima tag de cada repositorio).
@@ -167,7 +169,8 @@ opening and end with "}" to signal closing of your repository.</span><span title
 
 ">Also, in most cases your dependencies need more than one repository 
 there, so each time you finish a repository it should end with "}," - 
-only the last repository need not put a comma (,).</span><span title="Para facilitar o entendimento vou colocar um exemplo com apenas um repositório:
+only the last repository need not put a comma (,).</span>
+<br /><span title="Para facilitar o entendimento vou colocar um exemplo com apenas um repositório:
 "><b>For ease of understanding I will put an example with only one repository:</b></span></span><br />
 <span class="" id="result_box" lang="en"><span title="Para facilitar o entendimento vou colocar um exemplo com apenas um repositório:
 "><b>&nbsp;</b></span><i><span title="[
