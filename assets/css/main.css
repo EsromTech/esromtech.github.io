@@ -3878,10 +3878,12 @@
 	#intro {
 		background-attachment: fixed;
 		background-image: url("images/bg.png");
-		background-position: top right;
+		background-position: top ;
 		background-repeat: no-repeat;
-		background-size: 100% 100%;
+		background-size: 50%;
+		background-color: #0f0f0f;
 	}
+
 
 		#intro p {
 			font-size: 1.25em;
