@@ -42,12 +42,60 @@
 
 <body>
 
-  <iframe
-    id="vigifyApp"
-    title="VigifyOS"
-    src="https://script.google.com/macros/s/AKfycbx6mzBUpV-38koutH0MEH07bhTwU_SDx5L2COmVMv2BURe4z4E8Fn670B9nczy2ToRbUA/exec"
-    allow="camera; geolocation">
-  </iframe>
+<iframe
+  id="vigifyApp"
+  title="VigifyOS"
+  src="https://script.google.com/macros/s/AKfycbzTmGFV1toKDexDbS0-3pGvnUjDyyenN0zlKkBz0Tbx/dev?p=login"
+  allow="camera; geolocation">
+</iframe>
+
+<script>
+
+  const URL_BASE_VIGIFY =
+    "https://script.google.com/macros/s/AKfycbzTmGFV1toKDexDbS0-3pGvnUjDyyenN0zlKkBz0Tbx/dev";
+
+  window.addEventListener(
+    "message",
+    function(evento) {
+
+      const origemPermitida =
+        evento.origin === "https://script.google.com" ||
+        evento.origin.endsWith(
+          ".script.googleusercontent.com"
+        );
+
+      if (!origemPermitida) {
+        return;
+      }
+
+      if (
+        !evento.data ||
+        evento.data.tipo !==
+          "VIGIFY_NAVEGACAO"
+      ) {
+        return;
+      }
+
+      const iframe =
+        document.getElementById(
+          "vigifyApp"
+        );
+
+      if (
+        evento.data.destino ===
+        "login"
+      ) {
+
+        iframe.src =
+          URL_BASE_VIGIFY +
+          "?p=login";
+
+      }
+
+    }
+  );
+
+</script>
 
 </body>
 
