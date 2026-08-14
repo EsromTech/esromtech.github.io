@@ -58,12 +58,6 @@
     "message",
     function(evento) {
 
-  console.log(
-  "Mensagem recebida pelo portal:",
-  evento.origin,
-  evento.data
-);
-
       const origemPermitida =
         evento.origin === "https://script.google.com" ||
         evento.origin.endsWith(
