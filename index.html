@@ -49,6 +49,128 @@
   allow="camera; geolocation">
 </iframe>
 
+<script>
+
+  const iframeVigify =
+    document.getElementById(
+      "vigifyApp"
+    );
+
+  const chaveNavegacaoVigify =
+    "VIGIFY_PORTAL_URL_ATUAL";
+
+
+  // ========================================================
+  // RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
+  // ========================================================
+  function restaurarNavegacaoVigify() {
+
+    const urlSalva =
+      sessionStorage.getItem(
+        chaveNavegacaoVigify
+      );
+
+    if (!urlSalva) {
+      return;
+    }
+
+    if (
+      !urlSalva.startsWith(
+        "https://script.google.com/macros/s/"
+      )
+    ) {
+
+      sessionStorage.removeItem(
+        chaveNavegacaoVigify
+      );
+
+      return;
+    }
+
+    iframeVigify.src =
+      urlSalva;
+
+  }
+
+
+  // ========================================================
+  // RECEBE COMANDOS DE NAVEGAÇÃO DO VIGIFYOS
+  // ========================================================
+  window.addEventListener(
+    "message",
+    function(evento) {
+
+      const origemPermitida =
+        evento.origin ===
+          "https://script.google.com" ||
+        evento.origin.endsWith(
+          ".script.googleusercontent.com"
+        ) ||
+        evento.origin.endsWith(
+          "script.googleusercontent.com"
+        );
+
+      if (!origemPermitida) {
+        return;
+      }
+
+      if (
+        !evento.data ||
+        evento.data.tipo !==
+          "VIGIFY_NAVEGACAO"
+      ) {
+        return;
+      }
+
+      const urlDestino =
+        String(
+          evento.data.url || ""
+        ).trim();
+
+      if (
+        !urlDestino.startsWith(
+          "https://script.google.com/macros/s/"
+        )
+      ) {
+
+        console.error(
+          "URL de navegação Vigify inválida."
+        );
+
+        return;
+      }
+
+      if (
+        evento.data.destino ===
+        "login"
+      ) {
+
+        sessionStorage.removeItem(
+          chaveNavegacaoVigify
+        );
+
+        iframeVigify.src =
+          urlDestino;
+
+        return;
+      }
+
+      sessionStorage.setItem(
+        chaveNavegacaoVigify,
+        urlDestino
+      );
+
+      iframeVigify.src =
+        urlDestino;
+
+    }
+  );
+
+
+  restaurarNavegacaoVigify();
+
+</script>
+
 </body>
 
 </html>
