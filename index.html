@@ -66,7 +66,7 @@
   function restaurarNavegacaoVigify() {
 
     const urlSalva =
-      sessionStorage.getItem(
+      localStorage.getItem(
         chaveNavegacaoVigify
       );
 
@@ -80,7 +80,7 @@
       )
     ) {
 
-      sessionStorage.removeItem(
+      localStorage.removeItem(
         chaveNavegacaoVigify
       );
 
@@ -145,7 +145,7 @@
         "login"
       ) {
 
-        sessionStorage.removeItem(
+        localStorage.removeItem(
           chaveNavegacaoVigify
         );
 
@@ -155,7 +155,7 @@
         return;
       }
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         chaveNavegacaoVigify,
         urlDestino
       );
