@@ -114,13 +114,71 @@
         return;
       }
 
-      if (
-        !evento.data ||
-        evento.data.tipo !==
-          "VIGIFY_NAVEGACAO"
-      ) {
-        return;
-      }
+if (
+  !evento.data
+) {
+  return;
+}
+
+// SINCRONIZA A ROTA INTERNA DO ADMIN.
+if (
+  evento.data.tipo ===
+  "VIGIFY_ROTA_ADMIN"
+) {
+
+  const rota =
+    String(
+      evento.data.rota || ""
+    )
+      .trim()
+      .toLowerCase();
+
+  if (!rota) {
+    return;
+  }
+
+  const urlAtual =
+    localStorage.getItem(
+      chaveNavegacaoVigify
+    );
+
+  if (
+    urlAtual &&
+    urlAtual.startsWith(
+      "https://script.google.com/macros/s/"
+    )
+  ) {
+
+    const urlSemHash =
+      urlAtual.split(
+        "#"
+      )[0];
+
+    localStorage.setItem(
+      chaveNavegacaoVigify,
+      urlSemHash +
+      "#" +
+      rota
+    );
+
+  }
+
+  history.replaceState(
+    null,
+    "",
+    "#" + rota
+  );
+
+  return;
+
+}
+
+if (
+  evento.data.tipo !==
+  "VIGIFY_NAVEGACAO"
+) {
+  return;
+}
 
       const urlDestino =
         String(
@@ -139,6 +197,19 @@
 
         return;
       }
+
+      if (
+  evento.data.destino !==
+  "admin"
+) {
+
+  history.replaceState(
+    null,
+    "",
+    window.location.pathname
+  );
+
+}
 
       if (
         evento.data.destino ===
