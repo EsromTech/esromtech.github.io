@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <title>VigifyOS</title>
+  <title>VigifyOS DEV</title>
 
   <style>
 
@@ -42,205 +42,205 @@
 
 <body>
 
-<iframe
-  id="vigifyApp"
-  title="VigifyOS"
-  src="https://script.google.com/macros/s/AKfycbzTmGFV1toKDexDbS0-3pGvnUjDyyenN0zlKkBz0Tbx/dev?p=login&origem=portal"
-  allow="camera; geolocation">
-</iframe>
+  <iframe
+    id="vigifyApp"
+    title="VigifyOS"
+    src="https://script.google.com/macros/s/AKfycbwgMaGlofJkr5jYTfyixNJRTF5wJi0b2lUwVYGY2AnnZGSIpXhslFAgVoqRyy9WpYeXJg/exec?p=login&origem=portal"
+    allow="camera; geolocation">
+  </iframe>
 
-<script>
+  <script>
 
-  const iframeVigify =
-    document.getElementById(
-      "vigifyApp"
-    );
-
-  const chaveNavegacaoVigify =
-    "VIGIFY_PORTAL_URL_ATUAL";
-
-
-  // ========================================================
-  // RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
-  // ========================================================
-  function restaurarNavegacaoVigify() {
-
-    const urlSalva =
-      localStorage.getItem(
-        chaveNavegacaoVigify
+    const iframeVigify =
+      document.getElementById(
+        "vigifyApp"
       );
 
-    if (!urlSalva) {
-      return;
-    }
-
-    if (
-      !urlSalva.startsWith(
-        "https://script.google.com/macros/s/"
-      )
-    ) {
-
-      localStorage.removeItem(
-        chaveNavegacaoVigify
-      );
-
-      return;
-    }
-
-    iframeVigify.src =
-      urlSalva;
-
-  }
+    const chaveNavegacaoVigify =
+      "VIGIFY_PORTAL_URL_ATUAL";
 
 
-  // ========================================================
-  // RECEBE COMANDOS DE NAVEGAÇÃO DO VIGIFYOS
-  // ========================================================
-  window.addEventListener(
-    "message",
-    function(evento) {
+    // ========================================================
+    // RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
+    // ========================================================
+    function restaurarNavegacaoVigify() {
 
-      const origemPermitida =
-        evento.origin ===
-          "https://script.google.com" ||
-        evento.origin.endsWith(
-          ".script.googleusercontent.com"
-        ) ||
-        evento.origin.endsWith(
-          "script.googleusercontent.com"
+      const urlSalva =
+        localStorage.getItem(
+          chaveNavegacaoVigify
         );
 
-      if (!origemPermitida) {
+      if (!urlSalva) {
         return;
       }
 
-if (
-  !evento.data
-) {
-  return;
-}
-
-// SINCRONIZA A ROTA INTERNA DO ADMIN.
-if (
-  evento.data.tipo ===
-  "VIGIFY_ROTA_ADMIN"
-) {
-
-  const rota =
-    String(
-      evento.data.rota || ""
-    )
-      .trim()
-      .toLowerCase();
-
-  if (!rota) {
-    return;
-  }
-
-  const urlAtual =
-    localStorage.getItem(
-      chaveNavegacaoVigify
-    );
-
-  if (
-    urlAtual &&
-    urlAtual.startsWith(
-      "https://script.google.com/macros/s/"
-    )
-  ) {
-
-    const urlSemHash =
-      urlAtual.split(
-        "#"
-      )[0];
-
-    localStorage.setItem(
-      chaveNavegacaoVigify,
-      urlSemHash +
-      "#" +
-      rota
-    );
-
-  }
-
-  history.replaceState(
-    null,
-    "",
-    "#" + rota
-  );
-
-  return;
-
-}
-
-if (
-  evento.data.tipo !==
-  "VIGIFY_NAVEGACAO"
-) {
-  return;
-}
-
-      const urlDestino =
-        String(
-          evento.data.url || ""
-        ).trim();
-
       if (
-        !urlDestino.startsWith(
+        !urlSalva.startsWith(
           "https://script.google.com/macros/s/"
         )
-      ) {
-
-        console.error(
-          "URL de navegação Vigify inválida."
-        );
-
-        return;
-      }
-
-      if (
-  evento.data.destino !==
-  "admin"
-) {
-
-  history.replaceState(
-    null,
-    "",
-    window.location.pathname
-  );
-
-}
-
-      if (
-        evento.data.destino ===
-        "login"
       ) {
 
         localStorage.removeItem(
           chaveNavegacaoVigify
         );
 
-        iframeVigify.src =
-          urlDestino;
-
         return;
       }
 
-      localStorage.setItem(
-        chaveNavegacaoVigify,
-        urlDestino
-      );
-
       iframeVigify.src =
-        urlDestino;
+        urlSalva;
 
     }
-  );
 
 
-  restaurarNavegacaoVigify();
+    // ========================================================
+    // RECEBE COMANDOS DE NAVEGAÇÃO DO VIGIFYOS
+    // ========================================================
+    window.addEventListener(
+      "message",
+      function(evento) {
 
-</script>
+        const origemPermitida =
+          evento.origin ===
+            "https://script.google.com" ||
+          evento.origin.endsWith(
+            ".script.googleusercontent.com"
+          ) ||
+          evento.origin.endsWith(
+            "script.googleusercontent.com"
+          );
+
+        if (!origemPermitida) {
+          return;
+        }
+
+        if (
+          !evento.data
+        ) {
+          return;
+        }
+
+        // SINCRONIZA A ROTA INTERNA DO ADMIN.
+        if (
+          evento.data.tipo ===
+          "VIGIFY_ROTA_ADMIN"
+        ) {
+
+          const rota =
+            String(
+              evento.data.rota || ""
+            )
+              .trim()
+              .toLowerCase();
+
+          if (!rota) {
+            return;
+          }
+
+          const urlAtual =
+            localStorage.getItem(
+              chaveNavegacaoVigify
+            );
+
+          if (
+            urlAtual &&
+            urlAtual.startsWith(
+              "https://script.google.com/macros/s/"
+            )
+          ) {
+
+            const urlSemHash =
+              urlAtual.split(
+                "#"
+              )[0];
+
+            localStorage.setItem(
+              chaveNavegacaoVigify,
+              urlSemHash +
+              "#" +
+              rota
+            );
+
+          }
+
+          history.replaceState(
+            null,
+            "",
+            "#" + rota
+          );
+
+          return;
+
+        }
+
+        if (
+          evento.data.tipo !==
+          "VIGIFY_NAVEGACAO"
+        ) {
+          return;
+        }
+
+        const urlDestino =
+          String(
+            evento.data.url || ""
+          ).trim();
+
+        if (
+          !urlDestino.startsWith(
+            "https://script.google.com/macros/s/"
+          )
+        ) {
+
+          console.error(
+            "URL de navegação Vigify inválida."
+          );
+
+          return;
+        }
+
+        if (
+          evento.data.destino !==
+          "admin"
+        ) {
+
+          history.replaceState(
+            null,
+            "",
+            window.location.pathname
+          );
+
+        }
+
+        if (
+          evento.data.destino ===
+          "login"
+        ) {
+
+          localStorage.removeItem(
+            chaveNavegacaoVigify
+          );
+
+          iframeVigify.src =
+            urlDestino;
+
+          return;
+        }
+
+        localStorage.setItem(
+          chaveNavegacaoVigify,
+          urlDestino
+        );
+
+        iframeVigify.src =
+          urlDestino;
+
+      }
+    );
+
+
+    restaurarNavegacaoVigify();
+
+  </script>
 
 </body>
 
