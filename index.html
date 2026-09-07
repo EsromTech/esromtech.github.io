@@ -59,37 +59,47 @@
       "VIGIFY_PORTAL_URL_ATUAL";
 
 
-    // ========================================================
-    // RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
-    // ========================================================
-    function restaurarNavegacaoVigify() {
+// ========================================================
+// RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
+// ========================================================
+function restaurarNavegacaoVigify() {
 
-      const urlSalva =
-        localStorage.getItem(
-          chaveNavegacaoVigify
-        );
+  const urlLogin =
+    "https://script.google.com/macros/s/AKfycbwgMaGlofJkr5jYTfyixNJRTF5wJi0b2lUwVYGY2AnnZGSIpXhslFAgVoqRyy9WpYeXJg/exec?p=login&origem=portal";
 
-      if (!urlSalva) {
-        return;
-      }
+  const urlSalva =
+    localStorage.getItem(
+      chaveNavegacaoVigify
+    );
 
-      if (
-        !urlSalva.startsWith(
-          "https://script.google.com/macros/s/"
-        )
-      ) {
+  if (
+    urlSalva &&
+    urlSalva.startsWith(
+      "https://script.google.com/macros/s/"
+    )
+  ) {
 
-        localStorage.removeItem(
-          chaveNavegacaoVigify
-        );
+    iframeVigify.src =
+      urlSalva;
 
-        return;
-      }
+    return;
 
-      iframeVigify.src =
-        urlSalva;
+  }
 
-    }
+  if (
+    urlSalva
+  ) {
+
+    localStorage.removeItem(
+      chaveNavegacaoVigify
+    );
+
+  }
+
+  iframeVigify.src =
+    urlLogin;
+
+}
 
 
     // ========================================================
