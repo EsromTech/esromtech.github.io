@@ -129,6 +129,40 @@ function restaurarNavegacaoVigify() {
           return;
         }
 
+// SALVA A SESSÃO ATUAL SEM RECARREGAR O IFRAME.
+if (
+  evento.data.tipo ===
+  "VIGIFY_SESSAO_ATUAL"
+) {
+
+  const urlSessao =
+    String(
+      evento.data.url || ""
+    ).trim();
+
+  if (
+    !urlSessao.startsWith(
+      "https://script.google.com/macros/s/"
+    )
+  ) {
+
+    console.error(
+      "URL de sessão Vigify inválida."
+    );
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    chaveNavegacaoVigify,
+    urlSessao
+  );
+
+  return;
+
+}
+
         // SINCRONIZA A ROTA INTERNA DO ADMIN.
         if (
           evento.data.tipo ===
