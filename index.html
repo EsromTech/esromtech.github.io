@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <title>VigifyOS DEV</title>
+  <title>Cardens DEV</title>
 
   <style>
 
@@ -24,7 +24,7 @@
       background-color: #f8fafc;
     }
 
-    #vigifyApp {
+    #cardensApp {
       position: fixed;
       inset: 0;
       width: 100%;
@@ -43,33 +43,33 @@
 <body>
 
   <iframe
-    id="vigifyApp"
-    title="VigifyOS"
+    id="cardensApp"
+    title="Cardens"
     allow="camera; geolocation">
   </iframe>
 
   <script>
 
-    const iframeVigify =
+    const iframeCardens =
       document.getElementById(
-        "vigifyApp"
+        "cardensApp"
       );
 
-    const chaveNavegacaoVigify =
-      "VIGIFY_PORTAL_URL_ATUAL";
+    const chaveNavegacaoCardens =
+      "CARDENS_PORTAL_URL_ATUAL";
 
 
 // ========================================================
-// RESTAURA A NAVEGAÇÃO ATUAL DO VIGIFYOS
+// RESTAURA A NAVEGAÇÃO ATUAL DO CARDENS
 // ========================================================
-function restaurarNavegacaoVigify() {
+function restaurarNavegacaoCardens() {
 
   const urlLogin =
-    "https://script.google.com/macros/s/AKfycbwgMaGlofJkr5jYTfyixNJRTF5wJi0b2lUwVYGY2AnnZGSIpXhslFAgVoqRyy9WpYeXJg/exec?p=login&origem=portal";
+    "https://script.google.com/macros/s/AKfycbw8jNh0fd78zw0D281S7djMNAMRmyc-5RG1i0Anr1xmnZtKKVqDD29nvt3ziZWCqCXB/exec?p=login&origem=portal";
 
   const urlSalva =
     localStorage.getItem(
-      chaveNavegacaoVigify
+      chaveNavegacaoCardens
     );
 
   if (
@@ -79,7 +79,7 @@ function restaurarNavegacaoVigify() {
     )
   ) {
 
-    iframeVigify.src =
+    iframeCardens.src =
       urlSalva;
 
     return;
@@ -91,19 +91,19 @@ function restaurarNavegacaoVigify() {
   ) {
 
     localStorage.removeItem(
-      chaveNavegacaoVigify
+      chaveNavegacaoCardens
     );
 
   }
 
-  iframeVigify.src =
+  iframeCardens.src =
     urlLogin;
 
 }
 
 
     // ========================================================
-    // RECEBE COMANDOS DE NAVEGAÇÃO DO VIGIFYOS
+    // RECEBE COMANDOS DE NAVEGAÇÃO DO CARDENS
     // ========================================================
     window.addEventListener(
       "message",
@@ -132,7 +132,7 @@ function restaurarNavegacaoVigify() {
 // SALVA A SESSÃO ATUAL SEM RECARREGAR O IFRAME.
 if (
   evento.data.tipo ===
-  "VIGIFY_SESSAO_ATUAL"
+  "CARDENS_SESSAO_ATUAL"
 ) {
 
   const urlSessao =
@@ -147,7 +147,7 @@ if (
   ) {
 
     console.error(
-      "URL de sessão Vigify inválida."
+      "URL de sessão Cardens inválida."
     );
 
     return;
@@ -155,7 +155,7 @@ if (
   }
 
   localStorage.setItem(
-    chaveNavegacaoVigify,
+    chaveNavegacaoCardens,
     urlSessao
   );
 
@@ -166,7 +166,7 @@ if (
         // SINCRONIZA A ROTA INTERNA DO ADMIN.
         if (
           evento.data.tipo ===
-          "VIGIFY_ROTA_ADMIN"
+          "CARDENS_ROTA_ADMIN"
         ) {
 
           const rota =
@@ -182,7 +182,7 @@ if (
 
           const urlAtual =
             localStorage.getItem(
-              chaveNavegacaoVigify
+              chaveNavegacaoCardens
             );
 
           if (
@@ -198,7 +198,7 @@ if (
               )[0];
 
             localStorage.setItem(
-              chaveNavegacaoVigify,
+              chaveNavegacaoCardens,
               urlSemHash +
               "#" +
               rota
@@ -218,7 +218,7 @@ if (
 
         if (
           evento.data.tipo !==
-          "VIGIFY_NAVEGACAO"
+          "CARDENS_NAVEGACAO"
         ) {
           return;
         }
@@ -235,7 +235,7 @@ if (
         ) {
 
           console.error(
-            "URL de navegação Vigify inválida."
+            "URL de navegação Cardens inválida."
           );
 
           return;
@@ -260,28 +260,28 @@ if (
         ) {
 
           localStorage.removeItem(
-            chaveNavegacaoVigify
+            chaveNavegacaoCardens
           );
 
-          iframeVigify.src =
+          iframeCardens.src =
             urlDestino;
 
           return;
         }
 
         localStorage.setItem(
-          chaveNavegacaoVigify,
+          chaveNavegacaoCardens,
           urlDestino
         );
 
-        iframeVigify.src =
+        iframeCardens.src =
           urlDestino;
 
       }
     );
 
 
-    restaurarNavegacaoVigify();
+    restaurarNavegacaoCardens();
 
   </script>
 
