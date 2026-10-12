@@ -252,6 +252,22 @@ if (
 
         }
 
+// ENCAMINHA O LOGIN DA INSTÂNCIA SEM SAIR DO PORTAL.
+if (
+  evento.data.destino === "login-instancia"
+) {
+
+  localStorage.removeItem(
+    chaveNavegacaoCardens
+  );
+
+  iframeCardens.src =
+    urlDestino;
+
+  return;
+
+}
+
 if (
   evento.data.destino ===
   "login"
